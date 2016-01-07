@@ -232,7 +232,3 @@ class HessianFactory
         return false;
     }
 }
-
-
-
-
