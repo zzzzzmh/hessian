@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-include_once('Hessian1\Hessian1Parser.php');
+include_once(dirname(__FILE__) . '/Hessian1/Hessian1Parser.php');
 
 class Hessian1ServiceParser extends Hessian1Parser
 {

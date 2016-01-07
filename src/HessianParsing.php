@@ -76,7 +76,7 @@ class HessianRuleResolver
     {
         //if(!file_exists($file))
         //	throw new HessianParsingException("Could not load parsing rules from file $file");
-        include_once $file;
+        include_once dirname(__FILE__) . $file;
         $this->rules = $rules;
         $this->symbols = $symbols;
     }

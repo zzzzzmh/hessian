@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-include_once('HessianFactory.php');
-include_once('HessianBufferedStream.php');
+include_once(dirname(__FILE__) . '/HessianFactory.php');
+include_once(dirname(__FILE__) . '/HessianBufferedStream.php');
 
 /**
  * HessianPHP Server that wraps an object and exposes its methods remotedly

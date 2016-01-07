@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-include_once('HessianFactory.php');
-include_once('HessianTransport.php');
+include_once(dirname(__FILE__) . '/HessianFactory.php');
+include_once(dirname(__FILE__) . '/HessianTransport.php');
 
 /**
  * Proxy to issue RPC calls to remote Hessian services
