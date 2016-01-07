@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-include_once(app_path() . '\Libraries\Hessian\Hessian2Writer.php');
+include_once('Hessian2Writer.php');
 
 class Hessian2ServiceWriter extends Hessian2Writer
 {

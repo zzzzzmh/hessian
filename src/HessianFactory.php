@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
-include_once(app_path() . '\Libraries\Hessian\HessianInterfaces.php');
-include_once(app_path() . '\Libraries\Hessian\HessianExceptions.php');
-include_once(app_path() . '\Libraries\Hessian\HessianParsing.php');
-include_once(app_path() . '\Libraries\Hessian\HessianOptions.php');
-include_once(app_path() . '\Libraries\Hessian\HessianUtils.php');
-include_once(app_path() . '\Libraries\Hessian\HessianCallbackHandler.php');
-include_once(app_path() . '\Libraries\Hessian\HessianReferenceMap.php');
-include_once(app_path() . '\Libraries\Hessian\HessianTypeMap.php');
-include_once(app_path() . '\Libraries\Hessian\HessianStream.php');
+include_once('HessianInterfaces.php');
+include_once('HessianExceptions.php');
+include_once('HessianParsing.php');
+include_once('HessianOptions.php');
+include_once('HessianUtils.php');
+include_once('HessianCallbackHandler.php');
+include_once('HessianReferenceMap.php');
+include_once('HessianTypeMap.php');
+include_once('HessianStream.php');
 
 define('HESSIAN_PHP_VERSION', '2.0');
 
@@ -179,7 +179,7 @@ class HessianFactory
     function loadVersion2($mode, $stream, $options)
     {
         if ($mode == 'parser') {
-            include_once(app_path() . '\Libraries\Hessian\Hessian2/Hessian2ServiceParser.php');
+            include_once('Hessian2\Hessian2ServiceParser.php');
             $resolver = $this->getRulesResolver(2, 'Hessian2/hessian2rules.php');
             $parser = new Hessian2ServiceParser($resolver, $stream, $options);
             $filters['date'] = array('HessianDatetimeAdapter', 'toObject');
@@ -188,8 +188,8 @@ class HessianFactory
             return $parser;
         }
         if ($mode == 'writer') {
-            include_once(app_path() . '\Libraries\Hessian\Hessian2\Hessian2ServiceWriter.php');
-            include_once(app_path() . '\Libraries\Hessian\Hessian2\Hessian2IteratorWriter.php');
+            include_once('Hessian2\Hessian2ServiceWriter.php');
+            include_once('Hessian2\Hessian2IteratorWriter.php');
             $writer = new Hessian2ServiceWriter($options);
             $filters['@DateTime'] = array('HessianDatetimeAdapter', 'writeTime');
             $filters['@Iterator'] = array(new Hessian2IteratorWriter(), 'write');
@@ -198,7 +198,7 @@ class HessianFactory
             return $writer;
         }
         if ($mode == 'detect') {
-            include_once(app_path() . '\Libraries\Hessian\Hessian2\Hessian2ServiceParser.php');
+            include_once('Hessian2\Hessian2ServiceParser.php');
             return Hessian2ServiceParser::detectVersion($stream);
         }
     }
@@ -206,7 +206,7 @@ class HessianFactory
     function loadVersion1($mode, $stream, $options)
     {
         if ($mode == 'parser') {
-            include_once(app_path() . '\Libraries\Hessian\Hessian1\Hessian1ServiceParser.php');
+            include_once('Hessian1\Hessian1ServiceParser.php');
             $resolver = $this->getRulesResolver(1, 'Hessian1/hessian1rules.php');
             $parser = new Hessian1ServiceParser($resolver, $stream, $options);
             $filters['date'] = array('HessianDatetimeAdapter', 'toObject');
@@ -215,8 +215,8 @@ class HessianFactory
             return $parser;
         }
         if ($mode == 'writer') {
-            include_once(app_path() . '\Libraries\Hessian\Hessian1\Hessian1ServiceWriter.php');
-            include_once(app_path() . '\Libraries\Hessian\Hessian1\Hessian1IteratorWriter.php');
+            include_once('Hessian1\Hessian1ServiceWriter.php');
+            include_once('Hessian1\Hessian1IteratorWriter.php');
             $writer = new Hessian1ServiceWriter($options);
             $filters['@DateTime'] = array('HessianDatetimeAdapter', 'writeTime');
             $filters['@Iterator'] = array(new Hessian1IteratorWriter(), 'write');
@@ -225,7 +225,7 @@ class HessianFactory
             return $writer;
         }
         if ($mode == 'detect') {
-            include_once(app_path() . '\Libraries\Hessian\Hessian1\Hessian1ServiceParser.php');
+            include_once('Hessian1\Hessian1ServiceParser.php');
             return Hessian1ServiceParser::detectVersion($stream);
         }
 
