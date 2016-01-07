@@ -1,0 +1,21 @@
+{
+  "name": "hawok/hessian",
+  "description": "HessianPHP 2",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dima Katashov",
+      "email": "katashov.dima@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "classmap": [
+      "./src",
+      "./src/Hessian1",
+      "./src/Hessian2"
+    ]
+  }
+}
