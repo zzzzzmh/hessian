@@ -175,7 +175,11 @@ class HessianUtils
 
     public static function isInternalUTF8()
     {
-        $encoding = ini_get('mbstring.internal_encoding');
+        if (version_compare(phpversion(), '5.6.0', '<')) {
+            $encoding = ini_get('mbstring.internal_encoding');
+        } else {
+            $encoding = ini_get('default_charset');
+        }
         if (!$encoding)
             return false;
         return $encoding == 'UTF-8';
