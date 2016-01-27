@@ -61,7 +61,9 @@ class HessianCURLTransport implements IHessianTransport
             CURLOPT_POSTFIELDS => $data,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_HTTPHEADER => array("Content-Type: application/binary")
+            CURLOPT_HTTPHEADER => array("Content-Type: application/binary"),
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 10
         );
 
         if (!empty($options->transportOptions)) {
