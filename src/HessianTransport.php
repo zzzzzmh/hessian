@@ -30,6 +30,15 @@ interface IHessianTransport
     function getMetadata();
 }
 
+
+
+/**
+ * Special Exception for CURL
+ */
+class CurlException extends Exception 
+{
+}
+
 /**
  * Hessian request using the CURL library
  */
@@ -41,7 +50,7 @@ class HessianCURLTransport implements IHessianTransport
     function testAvailable()
     {
         if (!function_exists('curl_init'))
-            throw new Exception('You need to enable the CURL extension to use the curl transport');
+            throw new CurlException('You need to enable the CURL extension to use the curl transport');
     }
 
     function getMetadata()
@@ -53,7 +62,7 @@ class HessianCURLTransport implements IHessianTransport
     {
         $ch = curl_init($url);
         if (!$ch)
-            throw new Exception("curl_init error for url $url.");
+            throw new CurlException("curl_init error for url $url.");
 
         $curlOptions = array(
             CURLOPT_URL => $url,
@@ -81,11 +90,11 @@ class HessianCURLTransport implements IHessianTransport
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($error) {
             $this->safeClose($ch);
-            throw new Exception("CURL transport error: $error");
+            throw new CurlException("CURL transport error: $error");
         }
         if ($result === false) {
             $this->safeClose($ch);
-            throw new Exception("curl_exec error for url $url");
+            throw new CurlException("curl_exec error for url $url");
         }
         if (!empty($options->saveRaw))
             $this->rawData = $result;
@@ -95,7 +104,7 @@ class HessianCURLTransport implements IHessianTransport
             $msg = "Server error, returned HTTP code: $code";
             if (!empty($options->saveRaw))
                 $msg .= " Server sent: " . $result;
-            throw new Exception($msg);
+            throw new CurlException($msg);
         }
         $stream = new HessianStream($result);
         return $stream;
